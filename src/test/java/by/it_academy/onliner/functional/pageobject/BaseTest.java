@@ -9,9 +9,9 @@ import org.testng.annotations.Parameters;
 public class BaseTest {
 
     @BeforeClass
-    @Parameters(value = {"browser","remote"})
-    public static void setUp(String browser, boolean remote) {
-        WebDriverNavigator.getWebDriverByType(browser,remote);
+    //@Parameters(value = {"browser","remote"})
+    public static void setUp() {
+        WebDriverNavigator.getWebDriverByType();
     }
 
     @AfterClass
