@@ -8,7 +8,7 @@ import java.util.Map;
 
 import static by.it_academy.onliner.rest_api.util.ResponseBodyUtil.getListStringByJsonPath;
 import static by.it_academy.onliner.rest_api.util.ResponseBodyUtil.getObjectsByJsonPath;
-import static by.it_academy.onliner.util.ConfigReader.getEndpoint;
+import static by.it_academy.onliner.util.PropertiesReader.getEndpoint;
 import static by.it_academy.onliner.rest_api.util.GetRequestUtil.makeRequestAndGetResponseBody;
 
 public class SushiService {

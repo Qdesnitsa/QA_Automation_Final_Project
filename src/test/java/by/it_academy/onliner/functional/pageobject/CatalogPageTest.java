@@ -1,6 +1,5 @@
 package by.it_academy.onliner.functional.pageobject;
 
-import org.junit.jupiter.api.Tag;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -9,7 +8,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class CatalogPageTest extends BaseTest{
+public class CatalogPageTest extends BaseTest {
     private static final String TOP_MENU_SECTION_NAME = "Каталог";
     private static final List<String> SECTIONS_LIST = Arrays.asList("Электроника", "Компьютеры и сети", "Бытовая техника",
             "Стройка и ремонт", "Дом и сад", "Авто и мото", "Красота и спорт", "Детям и мамам", "Работа и офис");
@@ -22,7 +21,6 @@ public class CatalogPageTest extends BaseTest{
     }
 
     @Test
-    @Tag("functional")
     public void testCatalogContainsSectionList() {
         List<String> sectionsTitles = catalogpage.catalogLinks();
         assertThat(isPageContainSectionList(sectionsTitles))

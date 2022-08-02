@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Parallel testing suite" parallel="tests">
+    <test name="Parallel tests chrome" parallel="classes">
+        <parameter name="browser" value="MicrosoftEdge"/>
+        <parameter name="remote" value="false"/>
+        <classes>
+            <class name="by.it_academy.onliner.functional.pageobject.CatalogPageTest"/>
+            <class name="by.it_academy.onliner.functional.pageobject.ComponentsPageTest"/>
+            <class name="by.it_academy.onliner.functional.pageobject.ComputersAndNetworksPageTest"/>
+        </classes>
+    </test>
+
+
+</suite>

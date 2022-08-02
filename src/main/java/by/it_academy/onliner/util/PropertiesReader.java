@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-public class ConfigReader {
+public class PropertiesReader {
     private static final String CONFIG_PROPERTIES_PATH = "src/main/resources/config.properties";
     private static final String ENDPOINTS_PROPERTIES_PATH = "src/main/resources/endpoints.properties";
 

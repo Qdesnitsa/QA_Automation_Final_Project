@@ -3,7 +3,8 @@ package by.it_academy.onliner.functional.framework;
 import by.it_academy.onliner.functional.framework.impl.ChromeDriverCreator;
 import by.it_academy.onliner.functional.framework.impl.EdgeDriverCreator;
 import by.it_academy.onliner.functional.framework.impl.OperaDriverCreator;
-import by.it_academy.onliner.util.ConfigReader;
+import by.it_academy.onliner.functional.pageobject.BasePage;
+import by.it_academy.onliner.util.PropertiesReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -43,9 +44,9 @@ public enum WebDriverNavigator {
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(driverType);
-            capabilities.setCapability("os", ConfigReader.getConfigProperty("os.type"));
-            capabilities.setCapability("os_version", ConfigReader.getConfigProperty("os.version"));
-            URL gridURL = ConfigReader.getConfigURL("grid.url");
+            capabilities.setCapability("os", PropertiesReader.getConfigProperty("os.type"));
+            capabilities.setCapability("os_version", PropertiesReader.getConfigProperty("os.version"));
+            URL gridURL = PropertiesReader.getConfigURL("grid.url");
             BasePage.driver.set(new RemoteWebDriver(gridURL, capabilities));
         }
     }
@@ -61,10 +62,10 @@ public enum WebDriverNavigator {
             BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(ConfigReader.getConfigProperty("driverType"));
-            capabilities.setCapability("os", ConfigReader.getConfigProperty("os.type"));
-            capabilities.setCapability("os_version", ConfigReader.getConfigProperty("os.version"));
-            URL gridURL = ConfigReader.getConfigURL("grid.url");
+            capabilities.setBrowserName(PropertiesReader.getConfigProperty("driverType"));
+            capabilities.setCapability("os", PropertiesReader.getConfigProperty("os.type"));
+            capabilities.setCapability("os_version", PropertiesReader.getConfigProperty("os.version"));
+            URL gridURL = PropertiesReader.getConfigURL("grid.url");
             BasePage.driver.set(new RemoteWebDriver(gridURL, capabilities));
         }
     }

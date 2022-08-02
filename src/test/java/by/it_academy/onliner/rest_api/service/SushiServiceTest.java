@@ -1,8 +1,7 @@
 package by.it_academy.onliner.rest_api.service;
 
 import by.it_academy.onliner.rest_api.model.SushiProduct;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -12,7 +11,6 @@ public class SushiServiceTest {
     private final SushiService productsService = new SushiService();
 
     @Test
-    @Tag("API")
     public void testProductNamesAreNotEmpty() {
         assertThat(productsService.getProducts())
                 .as("Not every product has name")
@@ -20,7 +18,6 @@ public class SushiServiceTest {
     }
 
     @Test
-    @Tag("API")
     public void testProductNamesOfTypeRollsContainsPrefixRolls() {
         List<SushiProduct> facets = productsService.getProducts();
         assertThat(productsService.getNamePrefixes())
