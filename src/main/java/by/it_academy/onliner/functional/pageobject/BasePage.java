@@ -1,17 +1,22 @@
 package by.it_academy.onliner.functional.pageobject;
 
+import by.it_academy.onliner.functional.framework.WebDriverNavigator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BasePage {
-    private static final int DRIVER_WAIT_TIME = 60;
+    private static final Logger LOG = LoggerFactory.getLogger(BasePage.class);
+    private static final int DRIVER_WAIT_TIME = 30;
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public WebElement findElement(By by) {
@@ -36,7 +41,8 @@ public class BasePage {
         try {
             return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
         } catch (RuntimeException timeoutException) {
-            throw new RuntimeException("Failed attempt to get visibility of elements.");
+            LOG.error("Failed attempt to get visibility of elements.");
+            return Collections.emptyList();
         }
     }
 

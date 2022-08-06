@@ -28,7 +28,7 @@ public class CatalogPageTest extends BaseTest {
                 .isTrue();
     }
 
-    public boolean isPageContainSectionList(List<String> sectionsTitles) {
+    private boolean isPageContainSectionList(List<String> sectionsTitles) {
         return sectionsTitles.containsAll(SECTIONS_LIST);
     }
 

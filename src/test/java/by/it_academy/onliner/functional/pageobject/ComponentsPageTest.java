@@ -1,5 +1,6 @@
 package by.it_academy.onliner.functional.pageobject;
 
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -7,16 +8,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.List;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ComponentsPageTest extends BaseTest {
-    private static final String PATTERN_QUANTITY_OF_PRODUCTS_AVAILABLE = "[\\d]+\\s(товар)";
-    private static final String PATTERN_MIN_PRICE_OF_PRODUCT = "(от)\\s\\d+[.,]?[0-9]+\\s(р)";
+    private static final String QUANTITY_CRITERIA = "товар";
+    private static final String PRICE_CRITERIA = "р.";
+    //private static final String PATTERN_QUANTITY_OF_PRODUCTS_AVAILABLE = "[\\d]+\\s(товар)";
+    //private static final String PATTERN_MIN_PRICE_OF_PRODUCT = "(от)\\s\\d+[.,]?[0-9]+\\s(р)";
     private static final String TOP_MENU_SECTION_NAME = "Каталог";
     private static final String SUBSECTION_NAME = "Компьютеры и";
     private static final String LEFT_MENU_ITEM_NAME = "Комплектующие";
@@ -50,34 +48,18 @@ public class ComponentsPageTest extends BaseTest {
 
     @Test
     public void testAllElementsContainDescriptionQuantity() {
-        List<WebElement> targetWebElementsWithDescriptionsQuantity
-                = componentsPage.findElements(By.xpath(COMPONENTS_DESCRIPTION_LOCATOR));
         List<String> descriptionsList = componentsPage.findProductDescriptions();
-        Pattern pattern = Pattern.compile(PATTERN_QUANTITY_OF_PRODUCTS_AVAILABLE);
-        List<String> actualList = descriptionsList
-                .stream()
-                .flatMap(s -> Stream.ofNullable(s))
-                .filter(pattern.asPredicate())
-                .collect(Collectors.toList());
-        Assertions.assertThat(targetWebElementsWithDescriptionsQuantity)
+        assertThat(descriptionsList)
                 .as("Not all elements contain quantity in description")
-                .hasSameSizeAs(actualList);
+                .allMatch(s -> s.contains(QUANTITY_CRITERIA));
     }
 
     @Test
     public void testAllElementsContainDescriptionMinPrice() {
-        List<WebElement> targetWebElementsWithDescriptionsMinPrice
-                = componentsPage.findElements(By.xpath(COMPONENTS_DESCRIPTION_LOCATOR));
         List<String> descriptionsList = componentsPage.findProductDescriptions();
-        Pattern pattern = Pattern.compile(PATTERN_MIN_PRICE_OF_PRODUCT);
-        List<String> actualList = descriptionsList
-                .stream()
-                .flatMap(s -> Stream.ofNullable(s))
-                .filter(pattern.asPredicate())
-                .collect(Collectors.toList());
-        Assertions.assertThat(targetWebElementsWithDescriptionsMinPrice)
+        assertThat(descriptionsList)
                 .as("Not all elements contain min price in description")
-                .hasSameSizeAs(actualList);
+                .allMatch(s -> s.contains(PRICE_CRITERIA));
     }
 
     @AfterClass

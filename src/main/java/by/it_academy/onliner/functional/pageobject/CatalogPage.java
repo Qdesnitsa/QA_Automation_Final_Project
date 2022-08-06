@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 
 import java.util.List;
 
+import static java.lang.String.format;
+
 public class CatalogPage extends BasePage {
     private static final String CATALOG_TOP_MENU_LOCATOR = "//*[@class = 'catalog-navigation-classifier__item ']";
     public static final String COMPUTERS_AND_SMTH_XPATH_PATTERN
@@ -14,7 +16,7 @@ public class CatalogPage extends BasePage {
     }
 
     public ComputersAndNetworksPage clickOnComputers(String linkContains) {
-        waitForElementVisible(By.xpath(String.format(COMPUTERS_AND_SMTH_XPATH_PATTERN, linkContains))).click();
+        waitForElementVisible(By.xpath(format(COMPUTERS_AND_SMTH_XPATH_PATTERN, linkContains))).click();
         return new ComputersAndNetworksPage();
     }
 }

@@ -15,12 +15,15 @@
     <junit.jupiter.version>5.8.2</junit.jupiter.version>
     <junit.vintage.version>5.8.2</junit.vintage.version>
     <junit.platform.version>1.8.2</junit.platform.version>
+    <aspectj.version>1.9.8</aspectj.version>
+    <allure.version>2.13.6</allure.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <selenuim.version>3.141.59</selenuim.version>
     <chrome.driver.path>${project.basedir}/src/main/resources/chromedriver.exe/</chrome.driver.path>
     <opera.driver.path>${project.basedir}/src/main/resources/operadriver.exe/</opera.driver.path>
     <edge.driver.path>${project.basedir}/src/main/resources/msedgedriver.exe/</edge.driver.path>
-    <test.suite.path>${project.basedir}/src/test/resources/testng.xml</test.suite.path>
+    <test.suite.path>${project.basedir}/src/test/resources/testng_local.xml</test.suite.path>
+    <log4j.version>2.17.1</log4j.version>
   </properties>
 
   <build>
@@ -36,6 +39,24 @@
             <webdriver.opera.driver>${opera.driver.path}</webdriver.opera.driver>
             <webdriver.edge.driver>${edge.driver.path}</webdriver.edge.driver>
           </systemPropertyVariables>
+          <argLine>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+          </argLine>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.10.0</version>
+        <configuration>
+          <reportVersion>${allure.version}</reportVersion>
         </configuration>
       </plugin>
       <plugin>
@@ -87,7 +108,7 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.22.0</version>
+      <version>3.23.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -109,6 +130,27 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-collections4</artifactId>
       <version>4.4</version>
+    </dependency>
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <version>${allure.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j.version}</version>
     </dependency>
   </dependencies>
 

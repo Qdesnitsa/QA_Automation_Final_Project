@@ -8,6 +8,8 @@ import by.it_academy.onliner.util.PropertiesReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -17,6 +19,7 @@ public enum WebDriverNavigator {
     EDGE("MicrosoftEdge", new EdgeDriverCreator()),
     OPERA("opera", new OperaDriverCreator());
 
+    private static final Logger LOG = LoggerFactory.getLogger(WebDriverNavigator.class);
     private String driverType;
     private WebDriverCreator webDriver;
 
@@ -40,6 +43,7 @@ public enum WebDriverNavigator {
                     .filter(type -> type.getDriverType().equals(driverType))
                     .findAny()
                     .orElseThrow(() -> new RuntimeException("Driver not found."));
+            LOG.info("LocalWebDriver was created");
             BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -47,6 +51,7 @@ public enum WebDriverNavigator {
             capabilities.setCapability("os", PropertiesReader.getConfigProperty("os.type"));
             capabilities.setCapability("os_version", PropertiesReader.getConfigProperty("os.version"));
             URL gridURL = PropertiesReader.getConfigURL("grid.url");
+            LOG.info("RemoteWebDriver was created");
             BasePage.driver.set(new RemoteWebDriver(gridURL, capabilities));
         }
     }
@@ -59,6 +64,7 @@ public enum WebDriverNavigator {
                     .filter(type -> type.getDriverType().equals(driverType))
                     .findAny()
                     .orElseThrow(() -> new RuntimeException("Driver not found."));
+            LOG.info("LocalWebDriver was created");
             BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -66,6 +72,7 @@ public enum WebDriverNavigator {
             capabilities.setCapability("os", PropertiesReader.getConfigProperty("os.type"));
             capabilities.setCapability("os_version", PropertiesReader.getConfigProperty("os.version"));
             URL gridURL = PropertiesReader.getConfigURL("grid.url");
+            LOG.info("RemoteWebDriver was created");
             BasePage.driver.set(new RemoteWebDriver(gridURL, capabilities));
         }
     }

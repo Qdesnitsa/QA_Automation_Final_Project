@@ -30,7 +30,7 @@ public class ComputersAndNetworksPageTest extends BaseTest{
         isSectionTitlesContainTargetList(computersAndNetworksLinks);
         assertThat(computersAndNetworksLinks)
                 .as("Section computers and networks does not contain all target elements")
-                .hasSameSizeAs(TITLES_OF_ASIDE_LIST);
+                .containsExactlyElementsOf(TITLES_OF_ASIDE_LIST);
     }
 
     public boolean isSectionTitlesContainTargetList(List<String> sectionsTitles) {
