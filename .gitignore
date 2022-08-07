@@ -9,7 +9,7 @@ target/
 *.iml
 *.ipr
 *.idea
-/IT_Team/.mvn
+allure-results/
 mvnw.cmd
 mvnw
 

@@ -7,12 +7,12 @@ import java.util.List;
 import static java.lang.String.format;
 
 public class CatalogPage extends BasePage {
-    private static final String CATALOG_TOP_MENU_LOCATOR = "//*[@class = 'catalog-navigation-classifier__item ']";
+    private static final By CATALOG_TOP_MENU_LOCATOR = By.xpath("//*[@class = 'catalog-navigation-classifier__item ']");
     public static final String COMPUTERS_AND_SMTH_XPATH_PATTERN
             = "//*[@class = 'catalog-navigation-classifier__item-title-wrapper' and contains(text(), '%s')]";
 
     public List<String> catalogLinks() {
-        return getTextsFromWebElements(waitForElementsVisible(By.xpath(CATALOG_TOP_MENU_LOCATOR)));
+        return getTextsFromWebElements(waitForElementsVisible(CATALOG_TOP_MENU_LOCATOR));
     }
 
     public ComputersAndNetworksPage clickOnComputers(String linkContains) {

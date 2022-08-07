@@ -15,7 +15,7 @@ public class SearchingField extends BasePage {
 
     public List<String> findProductNames(String word) {
         Actions action = new Actions(driver.get());
-        action.sendKeys(word).build().perform();
+        action.sendKeys(word + Keys.ENTER).build().perform();
         List<String> webElementsWithNames = obtainListOfWebElements(HEADER_NAMES_LOCATOR);
         return webElementsWithNames;
     }

@@ -6,6 +6,7 @@ import by.it_academy.onliner.functional.framework.impl.OperaDriverCreator;
 import by.it_academy.onliner.functional.pageobject.BasePage;
 import by.it_academy.onliner.util.PropertiesReader;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public enum WebDriverNavigator {
     CHROME("chrome", new ChromeDriverCreator()),
@@ -37,17 +39,23 @@ public enum WebDriverNavigator {
     }
 
     public static void getWebDriverByType(String driverType, boolean remote) {
-        if (!remote) {
-            WebDriverNavigator driverNavigator = null;
+        WebDriverNavigator driverNavigator = null;
+        try {
             driverNavigator = Arrays.stream(WebDriverNavigator.values())
+                    .flatMap(s -> Stream.ofNullable(s))
                     .filter(type -> type.getDriverType().equals(driverType))
                     .findAny()
-                    .orElseThrow(() -> new RuntimeException("Driver not found."));
+                    .orElseThrow(() -> new WebDriverException("Driver not found."));
+        } catch (WebDriverException e) {
+            LOG.info("LocalWebDriver has not been set up");
+            driverNavigator = (WebDriverNavigator.EDGE);
+        }
+        if (!remote) {
             LOG.info("LocalWebDriver was created");
             BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(driverType);
+            capabilities.setBrowserName(driverNavigator.getDriverType());
             capabilities.setCapability("os", PropertiesReader.getConfigProperty("os.type"));
             capabilities.setCapability("os_version", PropertiesReader.getConfigProperty("os.version"));
             URL gridURL = PropertiesReader.getConfigURL("grid.url");
@@ -56,24 +64,25 @@ public enum WebDriverNavigator {
         }
     }
 
-    public static void getWebDriverByType() {
-        String driverType = System.getProperty("driverType");
-        if (System.getProperty("isRemote").equals("false")) {
-            WebDriverNavigator driverNavigator = null;
-            driverNavigator = Arrays.stream(WebDriverNavigator.values())
-                    .filter(type -> type.getDriverType().equals(driverType))
-                    .findAny()
-                    .orElseThrow(() -> new RuntimeException("Driver not found."));
-            LOG.info("LocalWebDriver was created");
-            BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());
-        } else {
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(PropertiesReader.getConfigProperty("driverType"));
-            capabilities.setCapability("os", PropertiesReader.getConfigProperty("os.type"));
-            capabilities.setCapability("os_version", PropertiesReader.getConfigProperty("os.version"));
-            URL gridURL = PropertiesReader.getConfigURL("grid.url");
-            LOG.info("RemoteWebDriver was created");
-            BasePage.driver.set(new RemoteWebDriver(gridURL, capabilities));
-        }
-    }
+//    public static void getWebDriverByType() {
+//        String driverType = System.getProperty("driverType");
+//        if (System.getProperty("isRemote").equals("false")) {
+//            WebDriverNavigator driverNavigator = null;
+//            driverNavigator = Arrays.stream(WebDriverNavigator.values())
+//                    .flatMap(s -> Stream.ofNullable(s))
+//                    .filter(type -> type.getDriverType().equals(driverType))
+//                    .findAny()
+//                    .orElseThrow(() -> new RuntimeException("Driver not found."));
+//            LOG.info("LocalWebDriver was created");
+//            BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());
+//        } else {
+//            DesiredCapabilities capabilities = new DesiredCapabilities();
+//            capabilities.setBrowserName(PropertiesReader.getConfigProperty("driverType"));
+//            capabilities.setCapability("os", PropertiesReader.getConfigProperty("os.type"));
+//            capabilities.setCapability("os_version", PropertiesReader.getConfigProperty("os.version"));
+//            URL gridURL = PropertiesReader.getConfigURL("grid.url");
+//            LOG.info("RemoteWebDriver was created");
+//            BasePage.driver.set(new RemoteWebDriver(gridURL, capabilities));
+//        }
+//    }
 }

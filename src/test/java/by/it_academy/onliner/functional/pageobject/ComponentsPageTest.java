@@ -1,7 +1,11 @@
 package by.it_academy.onliner.functional.pageobject;
 
 import java.util.List;
+
+import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.AssertionsForInterfaceTypes;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
@@ -18,18 +22,10 @@ public class ComponentsPageTest extends BaseTest {
     private static final String TOP_MENU_SECTION_NAME = "Каталог";
     private static final String SUBSECTION_NAME = "Компьютеры и";
     private static final String LEFT_MENU_ITEM_NAME = "Комплектующие";
-    public static final String COMPONENTS_NAME_LOCATOR
-            = "//*[@class='catalog-navigation-list__aside-title' and contains(text(), 'Комплектующие') " +
-            "and not (contains(text(), 'Комплектующие для'))]" +
-            "//following-sibling::div[@class='catalog-navigation-list__dropdown']" +
-            "//span//*[contains(@class, 'catalog-navigation-list__dropdown-title')]";
-    public static final String COMPONENTS_DESCRIPTION_LOCATOR
-            = "//*[@class='catalog-navigation-list__aside-title' and contains(text(), 'Комплектующие') " +
-            "and not (contains(text(), 'Комплектующие для'))]" +
-            "//following-sibling::div//span//*[@class='catalog-navigation-list__dropdown-description']";
     private static ComponentsPage componentsPage = new ComponentsPage();
 
     @BeforeClass
+    @Description("Navigate to Onliner and click on 'Components' tab")
     public static void getOnlinerGetCatalogGetComputersGetComponents() {
         componentsPage = OnlinerPageNavigation.navigateToOnlinerPage()
                 .clickOnCatalog(TOP_MENU_SECTION_NAME)
@@ -38,8 +34,10 @@ public class ComponentsPageTest extends BaseTest {
     }
 
     @Test
+    @Description("Test all elements contain name")
+    @Story("Search names across ComponentsPage tab elements")
     public void testAllElementsContainName() {
-        List<WebElement> targetWebElementsWithNames = componentsPage.findElements(By.xpath(COMPONENTS_NAME_LOCATOR));
+        List<WebElement> targetWebElementsWithNames = componentsPage.findNamesOfElements();
         List<String> actualWebElementsWithNames = componentsPage.findProductNames();
         Assertions.assertThat(targetWebElementsWithNames)
                 .as("Not all elements contain name")
@@ -47,6 +45,8 @@ public class ComponentsPageTest extends BaseTest {
     }
 
     @Test
+    @Description("Test all elements contain quantity")
+    @Story("Search quantity across ComponentsPage tab elements")
     public void testAllElementsContainDescriptionQuantity() {
         List<String> descriptionsList = componentsPage.findProductDescriptions();
         assertThat(descriptionsList)
@@ -55,6 +55,8 @@ public class ComponentsPageTest extends BaseTest {
     }
 
     @Test
+    @Description("Test all elements contain price")
+    @Story("Search prices across ComponentsPage tab elements")
     public void testAllElementsContainDescriptionMinPrice() {
         List<String> descriptionsList = componentsPage.findProductDescriptions();
         assertThat(descriptionsList)
@@ -62,8 +64,12 @@ public class ComponentsPageTest extends BaseTest {
                 .allMatch(s -> s.contains(PRICE_CRITERIA));
     }
 
-    @AfterClass
-    public static void closeAllWindows() {
-        componentsPage.closeBrowser();
+    @Test
+    @Description("Test all elements do not contain price. Test should be failed")
+    @Story("Search prices across ComponentsPage tab elements")
+    public void testNoElementsContainPrice() {
+        AssertionsForInterfaceTypes.assertThat(componentsPage.findProductDescriptions())
+                .as("Not all products contain price")
+                .noneMatch(e -> e.contains("р."));
     }
 }

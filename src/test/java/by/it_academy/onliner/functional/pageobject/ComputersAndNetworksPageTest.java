@@ -1,5 +1,7 @@
 package by.it_academy.onliner.functional.pageobject;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,6 +19,7 @@ public class ComputersAndNetworksPageTest extends BaseTest{
     private static ComputersAndNetworksPage computersAndNetworksPage = new ComputersAndNetworksPage();
 
     @BeforeClass
+    @Description("Navigate to Onliner and click on 'Computers and Networks' section")
     public static void getOnlinerGetCatalogGetComputers() {
         computersAndNetworksPage = OnlinerPageNavigation.navigateToOnlinerPage()
                 .clickOnCatalog(TOP_MENU_SECTION_NAME)
@@ -25,6 +28,8 @@ public class ComputersAndNetworksPageTest extends BaseTest{
     }
 
     @Test
+    @Description("Test section contains target list")
+    @Story("Search across ComputersAndNetworks tabs")
     public void testSectionContainsTabsList() {
         List<String> computersAndNetworksLinks = computersAndNetworksPage.computersAndNetworksLinks();
         isSectionTitlesContainTargetList(computersAndNetworksLinks);
@@ -35,10 +40,5 @@ public class ComputersAndNetworksPageTest extends BaseTest{
 
     public boolean isSectionTitlesContainTargetList(List<String> sectionsTitles) {
         return sectionsTitles.retainAll(TITLES_OF_ASIDE_LIST);
-    }
-
-    @AfterClass
-    public static void closeAllWindows() {
-        computersAndNetworksPage.closeBrowser();
     }
 }

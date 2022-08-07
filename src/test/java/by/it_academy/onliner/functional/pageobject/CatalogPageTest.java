@@ -1,5 +1,7 @@
 package by.it_academy.onliner.functional.pageobject;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -15,12 +17,15 @@ public class CatalogPageTest extends BaseTest {
     private static CatalogPage catalogpage = new CatalogPage();
 
     @BeforeClass
+    @Description("Navigate to Onliner and click on 'Catalog' tab")
     public static void getOnlinerGetCatalog() {
         catalogpage = OnlinerPageNavigation.navigateToOnlinerPage()
                 .clickOnCatalog(TOP_MENU_SECTION_NAME);
     }
 
     @Test
+    @Description("Test sections contain target values")
+    @Story("Search across CatalogPage sections")
     public void testCatalogContainsSectionList() {
         List<String> sectionsTitles = catalogpage.catalogLinks();
         assertThat(isPageContainSectionList(sectionsTitles))

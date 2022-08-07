@@ -1,6 +1,7 @@
 package by.it_academy.onliner.functional.pageobject;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,10 @@ public class ComponentsPage extends BasePage {
     public List<String> findProductNames() {
         List<String> webElementsWithNames = obtainListOfWebElements(COMPONENTS_NAME_LOCATOR);
         return webElementsWithNames;
+    }
+
+    public List<WebElement> findNamesOfElements() {
+        return driver.get().findElements(By.xpath(COMPONENTS_NAME_LOCATOR));
     }
 
     public List<String> findProductDescriptions() {
