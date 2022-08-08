@@ -53,6 +53,7 @@ public enum WebDriverNavigator {
         if (!remote) {
             LOG.info("LocalWebDriver was created");
             BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());
+            BasePage.driver.get().manage().window().maximize();
         } else {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(driverNavigator.getDriverType());
