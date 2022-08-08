@@ -16,7 +16,7 @@ import java.util.List;
 
 public class BasePage {
     private static final Logger LOG = LoggerFactory.getLogger(BasePage.class);
-    private static final int DRIVER_WAIT_TIME = 30;
+    private static final int DRIVER_WAIT_TIME = 60;
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public WebElement findElement(By by) {
