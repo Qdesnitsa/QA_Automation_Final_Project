@@ -3,7 +3,7 @@
 <!--<suite name="Parallel testing suite" parallel="tests">-->
     <test name="Parallel tests opera">
     <!--<test name="Parallel tests safari" parallel="classes">-->
-        <parameter name="browser" value="opera"/>
+        <parameter name="browser" value="chrome"/>
         <parameter name="remote" value="false"/>
         <classes>
             <class name="by.it_academy.onliner.functional.pageobject.CatalogPageTest"/>
