@@ -10,6 +10,7 @@ target/
 *.ipr
 *.idea
 allure-results/
+logs/
 mvnw.cmd
 mvnw
 

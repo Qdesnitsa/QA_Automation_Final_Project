@@ -22,7 +22,7 @@
     <chrome.driver.path>${project.basedir}/src/main/resources/chromedriver.exe/</chrome.driver.path>
     <opera.driver.path>${project.basedir}/src/main/resources/operadriver.exe/</opera.driver.path>
     <edge.driver.path>${project.basedir}/src/main/resources/msedgedriver.exe/</edge.driver.path>
-    <test.suite.path>${project.basedir}/src/test/resources/testng_local.xml</test.suite.path>
+    <suiteXml>${project.basedir}/src/test/resources/testng_local.xml</suiteXml>
     <log4j.version>2.17.1</log4j.version>
   </properties>
 
@@ -33,7 +33,9 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
         <configuration>
-          <suiteXmlFiles>${test.suite.path}</suiteXmlFiles>
+          <suiteXmlFiles>
+            <suiteXmlFile>${project.basedir}/${suiteXml}</suiteXmlFile>
+          </suiteXmlFiles>
           <systemPropertyVariables>
             <webdriver.chrome.driver>${chrome.driver.path}</webdriver.chrome.driver>
             <webdriver.opera.driver>${opera.driver.path}</webdriver.opera.driver>
