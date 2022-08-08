@@ -63,13 +63,4 @@ public class ComponentsPageTest extends BaseTest {
                 .as("Not all elements contain min price in description")
                 .allMatch(s -> s.contains(PRICE_CRITERIA));
     }
-
-    @Test
-    @Description("Test all elements do not contain price. Test should be failed")
-    @Story("Search prices across ComponentsPage tab elements")
-    public void testNoElementsContainPrice() {
-        AssertionsForInterfaceTypes.assertThat(componentsPage.findProductDescriptions())
-                .as("Not all products contain price")
-                .noneMatch(e -> e.contains("р."));
-    }
 }
