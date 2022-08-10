@@ -1,6 +1,6 @@
 package by.it_academy.onliner.functional.pageobject;
 
-import by.it_academy.onliner.functional.framework.WebDriverNavigator;
+import by.it_academy.onliner.functional.framework.impl.ChromeDriverCreator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class BasePage {
@@ -38,12 +37,7 @@ public class BasePage {
 
     public List<WebElement> waitForElementsVisible(By by) {
         Wait<WebDriver> wait = new WebDriverWait(driver.get(), DRIVER_WAIT_TIME);
-        try {
-            return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
-        } catch (RuntimeException timeoutException) {
-            LOG.error("Failed attempt to get visibility of elements.");
-            return Collections.emptyList();
-        }
+        return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
     }
 
     public List<String> getTextsFromWebElements(List<WebElement> webElements) {
@@ -60,7 +54,7 @@ public class BasePage {
         try {
             driver.get().quit();
         } catch (Exception e) {
-            throw new RuntimeException("Failed attempt to close browser");
+            LOG.info("Failed attempt to close browser");
         }
     }
 }

@@ -13,7 +13,6 @@ public class AllureListener extends TestListenerAdapter {
 
     @Override
     public void onTestSkipped(ITestResult tr) {
-
         takeScreenshotAndAttachToAllureReport();
     }
 }

@@ -7,19 +7,14 @@
         <parameter name="remote" value="false"/>
         <classes>
             <class name="by.it_academy.onliner.functional.pageobject.CatalogPageTest"/>
-            <class name="by.it_academy.onliner.functional.pageobject.ComponentsPageTest"/>
-            <class name="by.it_academy.onliner.functional.pageobject.ComputersAndNetworksPageTest"/>
             <class name="by.it_academy.onliner.functional.pageobject.SearchingFieldTest"/>
         </classes>
     </test>
     <test name="Parallel tests chrome" parallel="classes">
-    <!--<test name="Parallel tests chrome" parallel="classes">-->
         <parameter name="browser" value="chrome"/>
         <parameter name="remote" value="false"/>
         <classes>
             <class name="by.it_academy.onliner.functional.pageobject.CatalogPageTest"/>
-            <class name="by.it_academy.onliner.functional.pageobject.ComponentsPageTest"/>
-            <class name="by.it_academy.onliner.functional.pageobject.ComputersAndNetworksPageTest"/>
             <class name="by.it_academy.onliner.functional.pageobject.SearchingFieldTest"/>
         </classes>
     </test>

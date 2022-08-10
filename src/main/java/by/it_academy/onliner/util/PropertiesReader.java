@@ -1,5 +1,8 @@
 package by.it_academy.onliner.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,6 +11,7 @@ import java.net.URL;
 import java.util.Properties;
 
 public class PropertiesReader {
+    private static final Logger LOG = LoggerFactory.getLogger(PropertiesReader.class);
     private static final String CONFIG_PROPERTIES_PATH = "src/main/resources/config.properties";
     private static final String ENDPOINTS_PROPERTIES_PATH = "src/main/resources/endpoints.properties";
 
@@ -33,7 +37,8 @@ public class PropertiesReader {
             appProps.load(input);
             return appProps.getProperty(property);
         } catch (IOException ex) {
-            throw new IllegalStateException("Failed to find properties file");
+            LOG.info("Failed to find properties file");
+            return null;
         }
     }
 }

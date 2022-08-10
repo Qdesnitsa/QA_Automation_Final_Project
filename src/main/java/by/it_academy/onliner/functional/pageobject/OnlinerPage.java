@@ -13,6 +13,7 @@ public class OnlinerPage extends BasePage {
     private static final By POPUP_WINDOW_LOCATOR = By.xpath("//*[@class='modal-iframe']");
     private static final By SEARCH_FIELD_LOCATOR = By.xpath("//*[@class='search__input']");
     private static final By SEARCH_FIELD = By.xpath("//*[@class='fast-search__input']");
+    private static final String ANY_INPUT = "abc";
 
     public CatalogPage clickOnCatalog(String linkContains) {
         waitForElementVisible(By.xpath(format(TOP_MENU_SECTION_XPATH_PATTERN, linkContains))).click();
@@ -37,7 +38,7 @@ public class OnlinerPage extends BasePage {
         WebElement webElement = findElement(SEARCH_FIELD_LOCATOR);
         action.moveToElement(webElement).build().perform();
         webElement.clear();
-        webElement.sendKeys(Keys.CONTROL + "a");
+        webElement.sendKeys(Keys.CONTROL + ANY_INPUT);
         webElement.sendKeys(Keys.DELETE);
         return new SearchingField();
     }

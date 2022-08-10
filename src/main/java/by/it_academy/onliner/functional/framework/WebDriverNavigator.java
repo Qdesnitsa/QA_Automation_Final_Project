@@ -47,7 +47,7 @@ public enum WebDriverNavigator {
                     .findAny()
                     .orElseThrow(() -> new WebDriverException("Driver not found."));
         } catch (WebDriverException e) {
-            LOG.info("LocalWebDriver has not been set up");
+            LOG.info("LocalWebDriver has not been set up in xml file");
             driverNavigator = (WebDriverNavigator.EDGE);
         }
         if (!remote) {
