@@ -71,6 +71,6 @@ public class ComponentsPageTest extends BaseTest {
         List<String> descriptionsList = componentsPage.findProductDescriptions();
         assertThat(descriptionsList)
                 .as("Not all elements contain min price in description")
-                .allMatch(s -> s.contains(PRICE_CRITERIA));
+                .noneMatch(s -> s.contains(PRICE_CRITERIA));
     }
 }
