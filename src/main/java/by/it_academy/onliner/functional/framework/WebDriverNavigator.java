@@ -40,16 +40,11 @@ public enum WebDriverNavigator {
 
     public static void getWebDriverByType(String driverType, boolean remote) {
         WebDriverNavigator driverNavigator = null;
-        try {
-            driverNavigator = Arrays.stream(WebDriverNavigator.values())
-                    .flatMap(s -> Stream.ofNullable(s))
-                    .filter(type -> type.getDriverType().equals(driverType))
-                    .findAny()
-                    .orElseThrow(() -> new WebDriverException("Driver not found."));
-        } catch (WebDriverException e) {
-            LOG.info("LocalWebDriver has not been set up in xml file");
-            driverNavigator = (WebDriverNavigator.EDGE);
-        }
+        driverNavigator = Arrays.stream(WebDriverNavigator.values())
+                .flatMap(s -> Stream.ofNullable(s))
+                .filter(type -> type.getDriverType().equals(driverType))
+                .findAny()
+                .orElseGet(() -> WebDriverNavigator.EDGE);
         if (!remote) {
             LOG.info("LocalWebDriver was created");
             BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());

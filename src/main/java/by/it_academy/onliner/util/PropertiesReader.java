@@ -19,7 +19,8 @@ public class PropertiesReader {
         try {
             return new URL(getConfigProperty(url));
         } catch (MalformedURLException ex) {
-            throw new IllegalStateException("Malformed URL has occurred");
+            LOG.info("Malformed URL has occurred");
+            return null;
         }
     }
 

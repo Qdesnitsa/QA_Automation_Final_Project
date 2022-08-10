@@ -11,7 +11,7 @@ import org.testng.annotations.Parameters;
 
 @Listeners(AllureListener.class)
 public class BaseTest {
-    protected static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
 
     @BeforeClass
     @Parameters(value = {"browser","remote"})
