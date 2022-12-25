@@ -1,7 +1,7 @@
 ## **_Test_Automation_with_Java_Final_Project_**
 
 Status of last deployment:<br>
-<img src="https://github.com/Qdesnitsa/QA_Automation_Final_Project/workflows/My-GithubActions-Basics/badge.svg?branch=master"
+<img src="https://github.com/Qdesnitsa/QA_Automation_Final_Project/workflows/My-GithubActions-Basics/badge.svg?branch=master"><br>
 
 ---
 + Разработать фреймворк для автоматизации тестирования UI и API. Например, PageObject.<br>
