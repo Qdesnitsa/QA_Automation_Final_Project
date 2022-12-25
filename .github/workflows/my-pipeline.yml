@@ -1,4 +1,7 @@
 name: My-GithubActions-Basics
+env: 
+  APPLICATION_NAME : "Onliner"
+  TEST_PACKAGE_NAME: "onliner-test-ver-${{ github.sha }}
 
 on: 
   push:
@@ -9,13 +12,21 @@ jobs:
   first_job:
     runs-on: ubuntu-latest
     steps: 
-    - name: Running job1
-      run: test -DsuiteXml=src/test/resources/jenkins_job/testng_job1.xml
+    - name: Catalog page and Computers page tests
+      run: |
+        test -DsuiteXml=src/test/resources/jenkins_job/testng_job1.xml
+        test -DsuiteXml=src/test/resources/jenkins_job/testng_job2.xml
+        
+    - name: Print message
+      run: |
+        echo "Application name: ${{ env.APPLICATION_NAME }}"
+        echo "Application name: ${{ env.TEST_PACKAGE_NAME }}"
   
   second_jod:
     runs-on: ubuntu-latest
+    needs: [first_job]
     steps:
-    - name: Running job2
-      run: test -DsuiteXml=src/test/resources/jenkins_job/testng_job2.xml
+    - name: Components page tests
+      run: test -DsuiteXml=src/test/resources/jenkins_job/testng_job3.xml
     
 
