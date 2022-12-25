@@ -11,6 +11,10 @@ on:
 jobs:
   first_job:
     runs-on: ubuntu-latest
+    env:
+      JOB_VAR1: "This job level variable1"
+      JOB_VAR2: "This job level variable2"
+
     steps: 
     - name: Catalog page and Computers page tests
       run: |
@@ -18,9 +22,14 @@ jobs:
         test -DsuiteXml=src/test/resources/jenkins_job/testng_job2.xml
         
     - name: Print message
+      env:
+        LOCAL_VAR: "This super local environment variable"
       run: |
         echo "Application name: ${{ env.APPLICATION_NAME }}"
-        echo "Application name: ${{ env.TEST_PACKAGE_NAME }}"
+        echo "Test package name name: ${{ env.TEST_PACKAGE_NAME }}"
+        echo "Var1 = ${{ env.JOB_VAR1 }}"
+        echo "Var2 = ${{ env.JOB_VAR2 }}"
+        echo "Local variable = $LOCAL_VAR"
   
   second_jod:
     runs-on: ubuntu-latest
