@@ -1,0 +1,21 @@
+name: My-GithubActions-Basics
+
+on: 
+  push:
+    branches: 
+      - master
+      
+jobs:
+  first_job:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: Running job1
+      run: test -DsuiteXml=src/test/resources/jenkins_job/testng_job1.xml
+  
+  second_jod:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Running job2
+      run: test -DsuiteXml=src/test/resources/jenkins_job/testng_job2.xml
+    
+
