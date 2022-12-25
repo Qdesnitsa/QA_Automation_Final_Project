@@ -1,7 +1,7 @@
 name: My-GithubActions-Basics
 env: 
   APPLICATION_NAME : "Onliner"
-  TEST_PACKAGE_NAME: "onliner-test-ver-${{ github.sha }}
+  TEST_PACKAGE_NAME: "onliner-test-ver-${{ github.sha }}"
 
 on: 
   push:
