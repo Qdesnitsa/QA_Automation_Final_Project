@@ -64,13 +64,13 @@ public class ComponentsPageTest extends BaseTest {
                 .allMatch(s -> s.contains(PRICE_CRITERIA));
     }
 
-    @Test
-    @Description("Test all elements do not contain price. Test should be failed")
-    @Story("Search prices across ComponentsPage tab elements")
-    public void testNoElementsContainPrice() {
-        List<String> descriptionsList = componentsPage.findProductDescriptions();
-        assertThat(descriptionsList)
-                .as("Not all elements contain min price in description")
-                .noneMatch(s -> s.contains(PRICE_CRITERIA));
-    }
+//    @Test
+//    @Description("Test all elements do not contain price. Test should be failed")
+//    @Story("Search prices across ComponentsPage tab elements")
+//    public void testNoElementsContainPrice() {
+//        List<String> descriptionsList = componentsPage.findProductDescriptions();
+//        assertThat(descriptionsList)
+//                .as("Not all elements contain min price in description")
+//                .noneMatch(s -> s.contains(PRICE_CRITERIA));
+//    }
 }

@@ -44,7 +44,7 @@ public enum WebDriverNavigator {
                 .flatMap(s -> Stream.ofNullable(s))
                 .filter(type -> type.getDriverType().equals(driverType))
                 .findAny()
-                .orElseGet(() -> WebDriverNavigator.EDGE);
+                .orElseGet(() -> WebDriverNavigator.CHROME);
         if (!remote) {
             LOG.info("LocalWebDriver was created");
             BasePage.driver.set((WebDriver) driverNavigator.getWebDriver().createDriver());

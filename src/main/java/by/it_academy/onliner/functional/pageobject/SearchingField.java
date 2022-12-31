@@ -11,7 +11,8 @@ import java.util.stream.Stream;
 
 public class SearchingField extends BasePage {
     public static final String HEADER_NAMES_LOCATOR
-            = "//*[@class='search__content-wrapper']//following::div//*[@class='product__title']";
+            = "//*[@class='search__content-wrapper']//following::div//*[@class='product__title-link']";
+    private static final By SEARCH_FIELD_LOCATOR = By.xpath("//*[@class='search__input']");
 
     public List<String> findProductNames(String word) {
         Actions action = new Actions(driver.get());
@@ -21,13 +22,31 @@ public class SearchingField extends BasePage {
     }
 
     private List<String> obtainListOfWebElements(String xpath) {
-        List<String> listOfWebElements = findElements(By.xpath(xpath))
+        List<String> listOfWebElements = waitForElementsVisible(By.xpath(xpath))
                 .stream()
                 .flatMap(s -> Stream.ofNullable(s))
                 .map(p -> p.getText())
                 .filter(el -> !el.isEmpty())
                 .collect(Collectors.toList());
         return listOfWebElements;
+    }
+
+    public SearchingField cleanSearchingField() {
+        Actions action = new Actions(driver.get());
+        waitForElementsVisible(SEARCH_FIELD_LOCATOR);
+        WebElement webElement = findElement(SEARCH_FIELD_LOCATOR);
+        action.moveToElement(webElement).build().perform();
+        webElement.clear();
+        webElement.sendKeys(Keys.chord(Keys.SHIFT,Keys.CONTROL,"a"));
+        webElement.sendKeys(Keys.DELETE);
+        return new SearchingField();
+    }
+
+    public ProductPage obtainProductPage(String searchWord) {
+        Actions action = new Actions(driver.get());
+        action.sendKeys(searchWord + Keys.ENTER).build().perform();
+        waitForElementVisible(By.xpath(HEADER_NAMES_LOCATOR)).click();
+        return new ProductPage();
     }
 }
 

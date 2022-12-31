@@ -1,21 +1,24 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Parallel testing suite" parallel="tests">
-<!--<suite name="Parallel testing suite" parallel="tests">-->
-    <test name="Parallel tests safari" parallel="classes">
-    <!--<test name="Parallel tests safari" parallel="classes">-->
-        <parameter name="browser" value="Safari"/>
-        <parameter name="remote" value="false"/>
-        <classes>
-            <class name="by.it_academy.onliner.functional.pageobject.CatalogPageTest"/>
-            <class name="by.it_academy.onliner.functional.pageobject.SearchingFieldTest"/>
-        </classes>
-    </test>
+<suite name="Parallel testing suite" parallel="classes" thread-count="2">
+<!--    <test name="Parallel tests safari" parallel="classes">-->
+<!--    &lt;!&ndash;<test name="Parallel tests safari" parallel="classes">&ndash;&gt;-->
+<!--        <parameter name="browser" value="Safari"/>-->
+<!--        <parameter name="remote" value="false"/>-->
+<!--        <classes>-->
+<!--            <class name="by.it_academy.onliner.functional.pageobject.CatalogPageTest"/>-->
+<!--            <class name="by.it_academy.onliner.functional.pageobject.SearchingFieldTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
     <test name="Parallel tests chrome" parallel="classes">
         <parameter name="browser" value="chrome"/>
         <parameter name="remote" value="false"/>
         <classes>
             <class name="by.it_academy.onliner.functional.pageobject.CatalogPageTest"/>
+            <class name="by.it_academy.onliner.functional.pageobject.ComponentsPageTest"/>
+            <class name="by.it_academy.onliner.functional.pageobject.ComputersAndNetworksPageTest"/>
             <class name="by.it_academy.onliner.functional.pageobject.SearchingFieldTest"/>
+            <class name="by.it_academy.onliner.functional.pageobject.ProductPageTest"/>
+            <class name="by.it_academy.onliner.functional.pageobject.ShoppingCartTest"/>
         </classes>
     </test>
 
